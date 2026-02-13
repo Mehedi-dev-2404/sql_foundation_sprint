@@ -22,6 +22,7 @@ cursor.execute("INSERT INTO tasks (title, priority) VALUES (?, ?)",
 cursor.execute("INSERT INTO tasks (title, priority) VALUES (?, ?)", 
                ("Go Gym", "MEDIUM"))
 
+
 conn.commit()
 
 # 4️⃣ Read data
