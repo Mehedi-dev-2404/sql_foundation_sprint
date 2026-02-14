@@ -1,5 +1,14 @@
 import sqlite3
 
+class MiniTask:
+    def __init__(self, id, title, priority):
+        self.id = id
+        self.title = title
+        self.priority = priority
+
+    def __repr__(self):
+        return f"MiniTask(id={self.id}, title='{self.title}', priority='{self.priority}')"
+
 # 1️⃣ Connect to database (creates file if it doesn't exist)
 conn = sqlite3.connect("sprint.db")
 cursor = conn.cursor()
@@ -29,9 +38,15 @@ conn.commit()
 cursor.execute("SELECT * FROM tasks")
 rows = cursor.fetchall()
 
-print("All Tasks:")
+tasks = []
+
 for row in rows:
-    print(row)
+    task = MiniTask(row[0], row[1], row[2])
+    tasks.append(task)
+
+print("\nConverted to Objects:")
+for task in tasks:
+    print(task)
 
 # 5️⃣ Update data
 cursor.execute("UPDATE tasks SET priority = ? WHERE title = ?", 
